@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recommendation bonanza</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>welcome to the movie recommendation oracle!</h1>
+<form action="#" th:action="@{/}" th:object="${userForm}" method="post">
+	<select th:field="*{id}">
+	  <option th:each="user : ${users}"
+	  		  th:value="${user.value.id}"
+	  		  th:text="${user.value.name}"
+	></option>
+	</select>
+	<div>
+        <input type="radio" th:field="*{distance}" th:value="pearson" checked="true">
+        <label>Pearson</label>
+    </div>
+    <div>
+        <input type="radio" th:field="*{distance}" th:value="euclidean">
+        <label>Euclidean</label>
+    </div>
+<input name="submit" type="submit" value="submit" />
+</form>
+<p th:each="rec: ${recommendations}">
+  <span th:text="'Id: ' + ${rec.key} + ', Name: ' + ${rec.value}"></span>
+</p>
+
+</body>
+</html>
